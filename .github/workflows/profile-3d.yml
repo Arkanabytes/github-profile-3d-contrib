@@ -15,7 +15,7 @@ jobs:
       - name: Generate 3D Contribution Graph (night-rainbow)
         uses: yoshi389111/github-profile-3d-contrib@main
         with:
-          username: Arkanabytes
+          username: arkanabytes
           theme: night-rainbow
 
       - name: Upload artifact

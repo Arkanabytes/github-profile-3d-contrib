@@ -1,0 +1,37 @@
+name: GitHub 3D Profile Contributions (night-rainbow)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"  # Corre diariamente a medianoche UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Generate 3D Contribution Graph (night-rainbow)
+        uses: yoshi389111/github-profile-3d-contrib@main
+        with:
+          username: Arkanabytes
+          theme: night-rainbow
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./profile-3d-contrib
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
